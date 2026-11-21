@@ -1,41 +1,76 @@
-# Airbnb en CABA — Grupo 20 (FCE-UBA, 2.º cuatrimestre 2026)
 
-## Objetivo
-Estudiar asociaciones entre el **precio publicado** de Airbnb y las características del alojamiento, la concentración geográfica de anuncios y los perfiles de anfitriones. Los análisis son **descriptivos y asociativos, no causales**.
+# Airbnb en CABA — Grupo 20
 
-## Base y procedencia
-Dos archivos originales, sin alterar, proporcionados por el grupo:
-- `raw/listings.csv` (29.753 anuncios y 19 columnas).
-- `raw/listings.csv(1).gz` (29.753 anuncios y 90 columnas). Se usa, entre otras, `accommodates` y `last_scraped`.
+**Ciencia de Datos | FCE-UBA | Segundo cuatrimestre de 2026**
 
-La **fecha de referencia utilizada históricamente por el grupo** es el **23/09/2026**; esto no significa que el archivo tenga todos los registros capturados exactamente ese día. El campo `last_scraped` contiene fechas 25, 26 y 27/09/2026. No se descargaron archivos actualizados.
+## 1. Objetivo
 
-En `auxiliar/` se incluyen `neighbourhoods.csv` y `neighbourhoods.geojson`, tal como se recibieron. Los archivos de calendario y reseñas extensas que el grupo había compartido **no son necesarios para ejecutar este proyecto** y no se empaquetan aquí. `reviews.csv.gz` por sí solo supera los 100 MB, máximo de un archivo normal de GitHub; si más adelante lo usan, consideren Git LFS.
+Analizar el mercado de alojamientos publicados en Airbnb en la Ciudad Autónoma de Buenos Aires (CABA), a partir de tres ejes principales:
 
-## Cómo ejecutar
-1. **Descomprimir** este ZIP sin cambiar nombres de archivos ni carpetas.
-2. Abrir `proyecto.Rproj` en RStudio o seleccionar **la raíz** `grupo20_proyecto_final_R/` como *working directory* (debe contener `raw/` y `script/`).
-3. Instalar una vez los paquetes de CRAN:
-   ```r
-   install.packages(c('lmtest','sandwich','cluster','ggplot2'))
-   ```
-4. Ejecutar desde la consola de RStudio:
-   ```r
-   source('script/00_ejecutar_todo.R', encoding='UTF-8')
-   ```
-5. Los resultados quedarán bajo `output/tablas/` y `output/graficos/`.
+- **Precios:** estudiar la relación entre el precio publicado por noche, la capacidad, el tipo de alojamiento y el barrio.
+- **Distribución geográfica:** analizar la concentración de anuncios entre los distintos barrios de CABA.
+- **Anfitriones:** identificar perfiles de anfitriones mediante técnicas de agrupamiento.
 
-**Importante:** en el entorno donde se preparó este proyecto no se dispone de `Rscript`; el código se revisó estructuralmente y los números de control fueron comprobados de forma independiente con Python contra los CSV originales, **pero no se ha ejecutado el pipeline íntegro en R**. Deben ejecutarlo en RStudio y revisar posibles errores o diferencias (especialmente el clustering) antes de presentarlo como reproducido.
+El trabajo combina análisis descriptivo, visualizaciones, regresión y clustering.
 
-## Estructura y flujo
-```
-grupo20_proyecto_final_R/
-├── raw/                      # 2 archivos originales inalterados
-├── auxiliar/                 # tablas/barrios de apoyo y referencias
-├── input/                    # se genera listings_preparado.csv
+Los resultados permiten identificar **asociaciones, no relaciones causales**. Los precios analizados son valores publicados en Airbnb, no transacciones ni ingresos efectivamente realizados.
+
+## 2. Fuente de datos y período de referencia
+
+Se utilizan exclusivamente los archivos originales proporcionados al grupo, sin nuevas descargas ni sustitución de la base de datos.
+
+**Archivos principales:**
+
+- `raw/listings.csv`: 29.753 anuncios y 19 columnas.
+- `raw/listings.csv(1).gz`: 29.753 anuncios y 90 columnas.
+
+La fuente es **Inside Airbnb**, para alojamientos publicados en la Ciudad Autónoma de Buenos Aires.
+
+Se eligió esta base porque permite estudiar conjuntamente los precios publicados, las características de los alojamientos, la ubicación geográfica y los anfitriones.
+
+Entre las variables utilizadas se encuentran:
+
+- `price`: precio publicado.
+- `accommodates`: capacidad del alojamiento.
+- `room_type`: tipo de alojamiento.
+- `neighbourhood_cleansed`: barrio.
+- `host_id`: identificador del anfitrión.
+- `last_scraped`: fecha de captura del registro.
+
+### Aclaración sobre las fechas
+
+El grupo utilizó históricamente el **23/09/2026** como fecha de referencia.
+
+Sin embargo, en el archivo detallado, la variable `last_scraped` registra capturas del **25, 26 y 27 de septiembre de 2026**.
+
+Por lo tanto, los resultados corresponden a los archivos originales recibidos, pero no se presentan como un corte verificado al 23/09/2026.
+
+No se descargaron nuevas versiones de la base.
+
+En `auxiliar/` se conservan los archivos complementarios de barrios y las referencias de control.
+
+Los archivos extensos de calendarios y reseñas no son necesarios para reproducir los análisis incluidos en este repositorio y no fueron incorporados.
+
+## 3. Organización del repositorio
+
+El repositorio se organiza siguiendo la estructura solicitada para el trabajo práctico.
+
+```text
+TP_Ciencia_de_Datos_Grupo20/
+├── raw/
+│   ├── listings.csv
+│   └── listings.csv(1).gz
+│
+├── auxiliar/
+│   └── Archivos complementarios y controles
+│
+├── input/
+│   └── Datos preparados para el análisis
+│
 ├── output/
-│   ├── tablas/               # auditoría, descriptivos, modelos, controles
-│   └── graficos/             # JPG a 300 dpi (ggsave) + PNG auxiliares
+│   ├── tablas/
+│   └── graficos/
+│
 ├── script/
 │   ├── 00_ejecutar_todo.R
 │   ├── 01_preparacion.R
@@ -43,29 +78,318 @@ grupo20_proyecto_final_R/
 │   ├── 03_regresion.R
 │   ├── 04_clustering.R
 │   ├── 05_graficos.R
-│   └── 06_control_calidad.R
-├── utils/funciones_comunes.R
-└── proyecto.Rproj
+│   ├── 06_control_calidad.R
+│   └── 07_grafico_comunicativo_precio_vs_oferta.R
+│
+├── utils/
+│   └── funciones_comunes.R
+│
+├── proyecto.Rproj
+├── NOTAS_REPRODUCCION.md
+└── README.md
 ```
 
-## Decisiones metodológicas
-- **Precio NA:** no se imputa. Solo se excluye de análisis del precio; otros estudios pueden conservar el anuncio.
-- **Reseñas/mes NA:** se transforma a 0 si el anuncio tiene 0 reseñas totales, conservando el original.
-- **Outliers:** se registran los umbrales de IQR (también sobre log(precio)) y los casos sospechosos. **No se borran automáticamente** precios altos del modelo principal. Se estiman modelos de sensibilidad.
-- **Regresión:** log(precio) vs. capacidad, tipo y barrio; barrios con menos de 30 casos se agrupan solo para el modelo, con Palermo y vivienda completa como referencias. Inferencia agrupada por anfitrión, pruebas BP, VIF, RESET aproximado, Cook, modelo cuadrático como sensibilidad. Los porcentajes `100*(exp(beta)-1)` no son efectos causales.
-- **Concentración:** CR4, CR8 y HHI por proporción de anuncios por barrio, no índices de poder de mercado empresarial. La oferta geográfica concentrada no demuestra gentrificación.
-- **Clustering:** unidad de análisis **anfitrión**. K-means sobre cantidad de anuncios por anfitrión, disponibilidad promedio y reseñas promedio. Se trunca solo para K-means la primera variable al percentil 99; al describir el grupo se distingue explícitamente su media original de la media winsorizada. El algoritmo **nativo de R puede asignar grupos algo distintos** de la implementación Python usada en la entrega anterior: se deben utilizar **las cifras que realmente genere R** antes de cerrar el PowerPoint.
-- **Gráficos:** el exploratorio es el mapa de calor (15 barrios, 2 tipos, capacidades 1–6), con gris si n<20. El comunicativo aquí es **una propuesta mejorada**, todavía pendiente de la revisión narrativa final.
+### Función de cada carpeta
 
-## Carpeta / resultados
-- `output/tablas/01_*`: faltantes, disponibilidad, reseñas, umbrales y casos a investigar.
-- `output/tablas/02_*`: precios, tipos, CR4/CR8/HHI, anuncios por barrio.
-- `output/tablas/03_*`: regresión, errores estándar agrupados, VIF, observaciones influyentes y sensibilidad.
-- `output/tablas/04_*`: centroides/grupos, selección de k, promedios reales vs. winsorizados y participación en anuncios.
-- `output/tablas/05_*`: comparación Puerto Madero–resto de CABA.
-- `output/tablas/06_control_calidad.csv`: comprobaciones automáticas.
-- `output/graficos/grupo_20_*.jpg`: dos JPG exportados con `ggsave()` a 300 dpi.
+- **`raw/`:** almacena los datos originales, sin modificaciones.
+- **`auxiliar/`:** contiene archivos complementarios y referencias de control.
+- **`input/`:** contiene los datos preparados para los análisis.
+- **`output/tablas/`:** almacena tablas, indicadores y resultados calculados.
+- **`output/graficos/`:** contiene las visualizaciones generadas.
+- **`script/`:** reúne los scripts de R utilizados en el proyecto.
+- **`utils/`:** contiene las funciones auxiliares compartidas.
 
-## Verificación de procedencia
-Se incluyen `auxiliar/hashes_originales_sha256.csv` y `auxiliar/valores_referencia_python.csv` para cotejar integridad de los datos y valores de control. Esta tabla de control **no constituye resultados ejecutados en R**.
+El flujo de trabajo general es:
 
+**Datos originales → Preparación → Análisis → Resultados**
+
+Los archivos originales almacenados en `raw/` no se modifican.
+
+## 4. Cómo reproducir el análisis en RStudio
+
+### Requisitos
+
+Para ejecutar el proyecto se necesita:
+
+- R.
+- RStudio.
+- Los paquetes `lmtest`, `sandwich`, `cluster` y `ggplot2`.
+
+### Paso 1. Descargar el repositorio
+
+Clonar o descargar el repositorio desde GitHub, conservando su estructura de carpetas.
+
+### Paso 2. Abrir el proyecto
+
+Abrir el archivo `proyecto.Rproj` en RStudio.
+
+El directorio de trabajo debe ser la carpeta principal del repositorio, que contiene `raw/`, `script/` y `output/`.
+
+### Paso 3. Instalar los paquetes necesarios
+
+Ejecutar una sola vez:
+
+```r
+install.packages(c(
+  "lmtest",
+  "sandwich",
+  "cluster",
+  "ggplot2"
+))
+```
+
+### Paso 4. Ejecutar el análisis general
+
+Desde la consola de RStudio:
+
+```r
+source(
+  "script/00_ejecutar_todo.R",
+  encoding = "UTF-8"
+)
+```
+
+### Paso 5. Ejecutar el gráfico comunicativo actualizado
+
+Para generar específicamente la comparación entre precios y cantidad de anuncios por barrio:
+
+```r
+source(
+  "script/07_grafico_comunicativo_precio_vs_oferta.R",
+  encoding = "UTF-8"
+)
+```
+
+Este script calcula los indicadores del gráfico y genera:
+
+- `output/tablas/07_precio_oferta_por_barrio.csv`
+- `output/graficos/grupo_20_comunicativo.jpg`
+
+En el repositorio también se incluye la versión seleccionada para la presentación, denominada:
+
+`output/graficos/grupo_20_comunicativo.png`
+
+El JPG es la salida configurada en el script 07; el PNG es el archivo gráfico publicado. Para reproducir exactamente el formato PNG, debe utilizarse la exportación correspondiente.
+
+### Paso 6. Verificar los resultados
+
+Los resultados se almacenan en:
+
+- `output/tablas/`
+- `output/graficos/`
+
+Para controlar la ejecución se recomienda:
+
+1. Verificar que no aparezcan errores durante la ejecución de los scripts.
+2. Revisar `output/tablas/06_control_calidad.csv`.
+3. Contrastar los indicadores generados con las tablas de referencia.
+4. Verificar los resultados del clustering.
+5. Confirmar que los gráficos generados correspondan a los resultados presentados.
+
+El gráfico comunicativo fue ejecutado y comprobado en RStudio. La ejecución correcta de ese script específico no sustituye la verificación del proyecto completo.
+
+## 5. Decisiones metodológicas
+
+### 5.1. Tratamiento de precios faltantes
+
+Los precios faltantes no se imputan.
+
+Los anuncios sin precio se excluyen únicamente de aquellos análisis que requieren esta variable.
+
+### 5.2. Tratamiento de reseñas faltantes
+
+Cuando un anuncio registra cero reseñas totales y presenta un valor faltante en las reseñas mensuales, se interpreta ese faltante como cero para las variables derivadas correspondientes.
+
+El dato original se conserva.
+
+### 5.3. Tratamiento de valores extremos
+
+Se identifican y documentan valores extremos mediante el criterio del rango intercuartílico (IQR), tanto sobre el precio como sobre su logaritmo.
+
+Los precios altos **no se eliminan automáticamente** del modelo principal.
+
+También se realizan análisis de sensibilidad para evaluar la influencia de las observaciones extremas.
+
+### 5.4. Regresión
+
+Se utiliza el logaritmo del precio publicado como variable dependiente.
+
+Las principales variables explicativas son:
+
+- Capacidad del alojamiento.
+- Tipo de alojamiento.
+- Barrio.
+
+Se utilizan **Palermo** y **vivienda completa** como categorías de referencia.
+
+Los barrios con pocas observaciones se agrupan para la estimación del modelo.
+
+Se calculan errores estándar agrupados por anfitrión y se realizan diagnósticos adicionales:
+
+- Heterocedasticidad (Breusch-Pagan).
+- Multicolinealidad (VIF).
+- Especificación funcional (RESET aproximado).
+- Observaciones influyentes (distancia de Cook).
+- Modelos alternativos de sensibilidad.
+
+Los coeficientes permiten interpretar asociaciones condicionales entre variables, pero no efectos causales.
+
+### 5.5. Concentración geográfica
+
+Se calculan indicadores de concentración de anuncios entre barrios:
+
+- **CR4:** participación acumulada de los cuatro barrios con mayor cantidad de anuncios.
+- **CR8:** participación acumulada de los ocho barrios con mayor cantidad de anuncios.
+- **HHI:** índice calculado a partir de las participaciones de anuncios por barrio.
+
+Estos indicadores describen la concentración territorial de la oferta publicada.
+
+No deben interpretarse directamente como medidas de poder de mercado empresarial ni como pruebas de procesos de gentrificación.
+
+### 5.6. Clustering de anfitriones
+
+La unidad de análisis es el **anfitrión**, no el anuncio individual.
+
+Se utiliza el algoritmo **K-means**, considerando variables relacionadas con:
+
+- Cantidad de anuncios por anfitrión.
+- Disponibilidad promedio.
+- Reseñas promedio.
+
+Para reducir la influencia de valores extremos sobre el algoritmo, la cantidad de anuncios se limita al percentil 99 durante el agrupamiento.
+
+Al describir los grupos, se diferencia entre:
+
+- Los valores originales.
+- Los valores utilizados por el algoritmo después del tratamiento de extremos.
+
+Los resultados definitivos del clustering deben corresponder a la ejecución realizada en R.
+
+## 6. Visualizaciones principales
+
+### 6.1. Gráfico exploratorio
+
+**Archivo:**
+
+`output/graficos/grupo_20_exploratorio.jpg`
+
+Se presenta un mapa de calor que compara los precios medianos publicados según:
+
+- Barrio.
+- Tipo de alojamiento.
+- Capacidad.
+
+El gráfico permite explorar diferencias entre múltiples combinaciones de características.
+
+Se consideran 15 barrios, dos tipos de alojamiento y capacidades de uno a seis huéspedes.
+
+Las combinaciones con menos de 20 anuncios se distinguen visualmente para advertir sobre su menor respaldo muestral.
+
+**Objetivo:** identificar patrones, diferencias y posibles relaciones para profundizar mediante otros análisis.
+
+### 6.2. Gráfico comunicativo
+
+**Archivo publicado:**
+
+`output/graficos/grupo_20_comunicativo.png`
+
+**Script utilizado:**
+
+`script/07_grafico_comunicativo_precio_vs_oferta.R`
+
+Se presenta un gráfico de dispersión que relaciona dos variables:
+
+- **Eje horizontal:** precio mediano publicado por noche.
+- **Eje vertical:** cantidad de anuncios.
+
+Cada punto representa un barrio de CABA.
+
+Para asegurar una comparación más homogénea, se consideran únicamente:
+
+- Viviendas completas.
+- Alojamientos con capacidad para exactamente dos huéspedes.
+- Publicaciones con precio válido.
+- Barrios con al menos 30 anuncios que cumplen los criterios anteriores.
+
+Se destacan seis barrios representativos:
+
+1. Palermo.
+2. Puerto Madero.
+3. Recoleta.
+4. Belgrano.
+5. Villa Crespo.
+6. San Telmo.
+
+**Mensaje principal:**
+
+Puerto Madero presenta un precio mediano publicado considerablemente mayor, mientras que Palermo concentra una cantidad mucho más alta de anuncios comparables.
+
+Los otros cuatro barrios destacados permiten contextualizar esa diferencia dentro del mercado de CABA.
+
+El gráfico busca transmitir este hallazgo de forma directa y comprensible, incluso para personas que no conocen previamente el trabajo.
+
+No se utiliza el tamaño de los puntos para representar reservas ni se infiere ocupación a partir de las reseñas.
+
+La tabla con los datos utilizados se encuentra en:
+
+`output/tablas/07_precio_oferta_por_barrio.csv`
+
+## 7. Tablas y controles
+
+Las tablas del proyecto se organizan según el análisis correspondiente.
+
+| Archivos | Contenido |
+|---|---|
+| `01_*` | Calidad de datos, faltantes, disponibilidad, reseñas y valores extremos. |
+| `02_*` | Estadísticos descriptivos, precios y concentración geográfica. |
+| `03_*` | Modelos de regresión, diagnósticos y análisis de sensibilidad. |
+| `04_*` | Clustering, perfiles de anfitriones y concentración de anuncios. |
+| `05_*` | Comparación de precios entre Puerto Madero y el resto de CABA. |
+| `06_control_calidad.csv` | Comprobaciones automáticas de calidad y consistencia. |
+| `07_precio_oferta_por_barrio.csv` | Precio mediano y cantidad de anuncios por barrio para el gráfico comunicativo. |
+
+Los archivos se almacenan en `output/tablas/`.
+
+### Controles de procedencia
+
+En `auxiliar/` se incluyen:
+
+- `hashes_originales_sha256.csv`
+- `valores_referencia_python.csv`
+
+Permiten cotejar la integridad de los archivos originales y comparar resultados con valores de referencia.
+
+Las referencias calculadas en Python no sustituyen la ejecución del análisis en R.
+
+## 8. Alcance y limitaciones
+
+Los resultados permiten describir diferencias entre anuncios, barrios y perfiles de anfitriones.
+
+Sin embargo, deben considerarse algunas limitaciones:
+
+- El análisis es descriptivo y asociativo, no causal.
+- Los precios son valores publicados, no precios efectivamente pagados.
+- La cantidad de anuncios no equivale a la cantidad de reservas.
+- Las reseñas no permiten identificar directamente la ocupación real.
+- La concentración territorial de anuncios no demuestra por sí sola poder de mercado.
+- Las comparaciones del gráfico comunicativo controlan el tipo de alojamiento y la capacidad, pero no todas las características particulares de las propiedades.
+- Los resultados corresponden exclusivamente a los archivos originales utilizados.
+
+Las conclusiones deben interpretarse dentro de estos límites.
+
+## 9. Consideraciones para la defensa oral
+
+Cada integrante del grupo debe poder explicar:
+
+- La procedencia de los datos y la unidad de análisis.
+- Las decisiones de limpieza y preparación.
+- El tratamiento de faltantes y valores extremos.
+- Las diferencias entre media y mediana.
+- Los filtros utilizados en cada visualización.
+- La interpretación de los coeficientes de la regresión.
+- El alcance de los indicadores CR4, CR8 y HHI.
+- La elección de variables y el funcionamiento del clustering.
+- La diferencia entre los valores originales y los utilizados para el agrupamiento.
+- Los principales hallazgos y las limitaciones del trabajo.
+
+**El objetivo es que tanto el análisis como las visualizaciones sean reproducibles, interpretables y defendibles desde el punto de vista metodológico.**
