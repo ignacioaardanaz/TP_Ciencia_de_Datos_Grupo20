@@ -192,7 +192,7 @@ Para controlar la ejecución se recomienda:
 4. Verificar los resultados del clustering.
 5. Confirmar que los gráficos generados correspondan a los resultados presentados.
 
-El gráfico comunicativo fue ejecutado y comprobado en RStudio. La ejecución correcta de ese script específico no sustituye la verificación del proyecto completo. **Los resultados `07_*` deben regenerarse localmente y subirse a GitHub** para que coincidan con el código actualizado.
+El gráfico comunicativo fue ejecutado y comprobado en RStudio. La ejecución correcta de ese script específico no sustituye la verificación del proyecto completo. 
 
 ## 5. Decisiones metodológicas
 
