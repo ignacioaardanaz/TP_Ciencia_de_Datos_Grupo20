@@ -42,7 +42,7 @@ p_exploratorio <- ggplot2::ggplot(tabla,ggplot2::aes(x=factor(accommodates),y=ne
     axis.text.y=ggplot2::element_text(size=9),
     plot.title=ggplot2::element_text(face='bold',size=15,color='#20353B'),
     plot.subtitle=ggplot2::element_text(size=10),plot.caption=ggplot2::element_text(size=9))
-ggplot2::ggsave('output/graficos/grupo_20_exploratorio.jpg',p_exploratorio,
+ggplot2::ggsave('output/graficos/grupo_20_exploratorio.jpeg',p_exploratorio,
                 width=25,height=18,units='cm',dpi=300,bg='#FAF8F3')
 
 # COMUNICATIVO: 15 barrios como contexto, pero UN SOLO mensaje y comparacion
