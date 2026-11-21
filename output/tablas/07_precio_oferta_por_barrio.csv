@@ -1,0 +1,46 @@
+"barrio","anuncios","precio_mediano","incluido_en_grafico","etiquetado"
+"Palermo",4293,105209,TRUE,TRUE
+"Recoleta",1713,99373,TRUE,TRUE
+"San Nicolas",834,84085,TRUE,FALSE
+"Monserrat",606,89520,TRUE,FALSE
+"Retiro",604,91194,TRUE,FALSE
+"Belgrano",575,100138,TRUE,TRUE
+"Almagro",426,83608.5,TRUE,FALSE
+"Villa Crespo",394,86905.5,TRUE,TRUE
+"Balvanera",360,81028,TRUE,FALSE
+"San Telmo",288,87907,TRUE,TRUE
+"Colegiales",262,108737,TRUE,FALSE
+"Chacarita",234,93512.5,TRUE,FALSE
+"Nuñez",233,107913,TRUE,FALSE
+"Caballito",185,80263,TRUE,FALSE
+"Puerto Madero",184,180401,TRUE,TRUE
+"Villa Urquiza",158,91346,TRUE,FALSE
+"Constitucion",146,80101,TRUE,FALSE
+"Saavedra",90,94850,TRUE,FALSE
+"Barracas",62,88289.5,TRUE,FALSE
+"San Cristobal",62,73820,TRUE,FALSE
+"Flores",56,67159,TRUE,FALSE
+"Coghlan",49,90431,TRUE,FALSE
+"Villa Ortuzar",45,77515,TRUE,FALSE
+"Boca",41,108546,TRUE,FALSE
+"Villa Del Parque",38,76904.5,TRUE,FALSE
+"Villa Devoto",36,82301.5,TRUE,FALSE
+"Boedo",33,70326,TRUE,FALSE
+"Parque Patricios",25,68032,FALSE,FALSE
+"Parque Chas",24,64168.5,FALSE,FALSE
+"Parque Chacabuco",22,78273.5,FALSE,FALSE
+"Paternal",14,53353,FALSE,FALSE
+"Villa Santa Rita",14,62316,FALSE,FALSE
+"Villa Gral. Mitre",13,69916,FALSE,FALSE
+"Villa Pueyrredon",13,85264,FALSE,FALSE
+"Agronomia",10,72993,FALSE,FALSE
+"Liniers",9,85614,FALSE,FALSE
+"Villa Luro",8,74499.5,FALSE,FALSE
+"Monte Castro",7,69184,FALSE,FALSE
+"Floresta",5,51216,FALSE,FALSE
+"Nueva Pompeya",4,60316.5,FALSE,FALSE
+"Velez Sarsfield",4,73000,FALSE,FALSE
+"Parque Avellaneda",3,70835,FALSE,FALSE
+"Mataderos",2,75422,FALSE,FALSE
+"Villa Lugano",2,101258.5,FALSE,FALSE
+"Villa Soldati",1,107018,FALSE,FALSE
