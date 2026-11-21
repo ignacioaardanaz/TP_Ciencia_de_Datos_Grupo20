@@ -1,0 +1,14 @@
+"prueba","ok"
+"29753 publicaciones",TRUE
+"14623 anfitriones",TRUE
+"2119 precios faltantes",TRUE
+"3479 resenas por mes faltantes antes de recodificar",TRUE
+"precios conservados en base preparada",TRUE
+"CR4 coherente",TRUE
+"HHI coherente",TRUE
+"regresion usa 27634 anuncios",TRUE
+"clusters suman 14623 hosts",TRUE
+"clusters suman 29753 anuncios",TRUE
+"promedio winsorizado <= percentil 99",TRUE
+"Puerto Madero mediana 180401",TRUE
+"resto de CABA mediana 96316",TRUE
