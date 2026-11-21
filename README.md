@@ -69,5 +69,3 @@ grupo20_proyecto_final_R/
 ## Verificación de procedencia
 Se incluyen `auxiliar/hashes_originales_sha256.csv` y `auxiliar/valores_referencia_python.csv` para cotejar integridad de los datos y valores de control. Esta tabla de control **no constituye resultados ejecutados en R**.
 
-## Para la exposición oral
-Cada integrante debe poder explicar los datos y las unidades de análisis, por qué la media y mediana difieren, por qué no se recortan automáticamente valores altos, qué significa un coeficiente de log(precio), el alcance de HHI/CR4, y cómo se distinguen los valores winsorizados de los originales. Explicar siempre **asociaciones, no causalidad**.
