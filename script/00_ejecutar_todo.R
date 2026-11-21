@@ -5,7 +5,8 @@ verificar_raiz()
 preparar_carpetas()
 verificar_paquetes(c('lmtest','sandwich','cluster','ggplot2'))
 orden <- c('01_preparacion.R', '02_descriptivos_concentracion.R',
-           '03_regresion.R','04_clustering.R','05_graficos.R','06_control_calidad.R')
+           '03_regresion.R','04_clustering.R','05_graficos.R','06_control_calidad.R',
+           '07_grafico_comunicativo_precio_vs_oferta.R')
 for (archivo in orden) {
   cat('\n\n==========',archivo,'==========\n')
   source(file.path('script',archivo),encoding='UTF-8',chdir=FALSE)
