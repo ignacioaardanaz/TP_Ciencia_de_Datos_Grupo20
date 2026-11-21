@@ -1,0 +1,7 @@
+# Mantener carpetas, ignorar outputs generados por defecto
+
+.Rhistory
+.RData
+.Rproj.user/
+# El grupo puede decidir versionar outputs: el repositorio solicitado por el
+# profesor SÍ requiere subir gráficos y tablas finales. No ignoramos output/.
