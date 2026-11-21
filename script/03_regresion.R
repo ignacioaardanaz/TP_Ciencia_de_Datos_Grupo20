@@ -93,7 +93,7 @@ vc_cuad <- sandwich::vcovCL(mod_cuad, cluster=datos$host_id, type='HC1')
 cat('\nCAPACIDAD CUADRATICA (sensibilidad):\n')
 print(lmtest::coeftest(mod_cuad, vcov.=vc_cuad, df=g-1)['I(accommodates^2)',,drop=FALSE])
 
-pct <- function(m, term) if (term %in% names(coef(m))) 100*expm1(coef(m)[[term]]) else NA_real_
+# La funcion pct se carga desde utils/funciones_comunes.R.
 puerto <- 'barrio_modeloPuerto Madero'
 comparacion <- data.frame(
   modelo=c('Sin recorte','IQR de log(precio)','IQR del precio','Capacidad cuadratica'),

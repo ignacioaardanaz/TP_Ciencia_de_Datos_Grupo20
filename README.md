@@ -82,7 +82,17 @@ TP_Ciencia_de_Datos_Grupo20/
 │   └── 07_grafico_comunicativo_precio_vs_oferta.R
 │
 ├── utils/
-│   └── funciones_comunes.R
+│   ├── funciones_comunes.R       # Cargador de funciones
+│   ├── verificar_raiz.R
+│   ├── preparar_carpetas.R
+│   ├── verificar_paquetes.R
+│   ├── leer_preparado.R
+│   ├── formato_ars.R
+│   ├── formato_entero.R
+│   ├── pct.R
+│   ├── centros_plus_plus.R
+│   ├── ajustar_kmeans.R
+│   └── fmt.R
 │
 ├── proyecto.Rproj
 ├── NOTAS_REPRODUCCION.md
@@ -97,7 +107,7 @@ TP_Ciencia_de_Datos_Grupo20/
 - **`output/tablas/`:** almacena tablas, indicadores y resultados calculados.
 - **`output/graficos/`:** contiene las visualizaciones generadas.
 - **`script/`:** reúne los scripts de R utilizados en el proyecto.
-- **`utils/`:** contiene las funciones auxiliares compartidas.
+- **`utils/`:** contiene una función auxiliar por archivo. `funciones_comunes.R` es solamente un cargador que invoca los diez scripts individuales; no contiene definiciones de funciones. Los análisis conservan la misma lógica y utilizan ese cargador.
 
 El flujo de trabajo general es:
 

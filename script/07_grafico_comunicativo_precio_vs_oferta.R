@@ -66,8 +66,8 @@ palermo <- tabla[tabla$barrio == "Palermo", , drop = FALSE]
 puerto <- tabla[tabla$barrio == "Puerto Madero", , drop = FALSE]
 diferencia_pct <- 100 * (puerto$precio_mediano / palermo$precio_mediano - 1)
 relacion_anuncios <- palermo$anuncios / puerto$anuncios
-fmt <- function(x) format(round(x), big.mark = ".", decimal.mark = ",",
-                          trim = TRUE, scientific = FALSE)
+# La funcion fmt se carga desde utils/funciones_comunes.R.
+
 
 # Verificar las fechas efectivas de la fuente y no atribuir un corte falso.
 fechas <- as.Date(a$last_scraped)
