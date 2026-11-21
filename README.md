@@ -377,19 +377,4 @@ Sin embargo, deben considerarse algunas limitaciones:
 
 Las conclusiones deben interpretarse dentro de estos límites.
 
-## 9. Consideraciones para la defensa oral
 
-Cada integrante del grupo debe poder explicar:
-
-- La procedencia de los datos y la unidad de análisis.
-- Las decisiones de limpieza y preparación.
-- El tratamiento de faltantes y valores extremos.
-- Las diferencias entre media y mediana.
-- Los filtros utilizados en cada visualización.
-- La interpretación de los coeficientes de la regresión.
-- El alcance de los indicadores CR4, CR8 y HHI.
-- La elección de variables y el funcionamiento del clustering.
-- La diferencia entre los valores originales y los utilizados para el agrupamiento.
-- Los principales hallazgos y las limitaciones del trabajo.
-
-**El objetivo es que tanto el análisis como las visualizaciones sean reproducibles, interpretables y defendibles desde el punto de vista metodológico.**
