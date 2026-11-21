@@ -277,7 +277,7 @@ Los resultados definitivos del clustering deben corresponder a la ejecución rea
 
 **Archivo:**
 
-`output/graficos/grupo_20_exploratorio.jpeg` (archivo actualmente publicado; el script 05 exporta `.jpg`)
+`output/graficos/grupo_20_exploratorio.jpeg`
 
 Se presenta un mapa de calor que compara los precios medianos publicados según:
 
