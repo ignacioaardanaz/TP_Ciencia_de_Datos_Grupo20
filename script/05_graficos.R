@@ -58,43 +58,10 @@ resumen_segmento <- data.frame(grupo=c('Puerto Madero','Resto de CABA'),
  n=c(nrow(pm),nrow(resto)),mediana=c(mediana_pm,mediana_resto))
 write.csv(resumen_segmento,'output/tablas/05_comparacion_puerto_madero_resto.csv',row.names=FALSE)
 
-# Descriptivo mas rico: rangos P25-P75 por barrio, el mensaje es la
-# comparacion entre Puerto Madero y todo el resto, no con un barrio elegido.
-q1 <- aggregate(price~neighbourhood,data=seg,FUN=function(x) unname(quantile(x,.25)))
-q3 <- aggregate(price~neighbourhood,data=seg,FUN=function(x) unname(quantile(x,.75)))
-md <- aggregate(price~neighbourhood,data=seg,FUN=median)
-ng <- aggregate(price~neighbourhood,data=seg,FUN=length)
-names(q1)[2]<-'q25';names(q3)[2]<-'q75';names(md)[2]<-'mediana';names(ng)[2]<-'n'
-db <- Reduce(function(x,y)merge(x,y,by='neighbourhood'),list(q1,q3,md,ng))
-show_b <- names(sort(table(seg$neighbourhood),decreasing=TRUE))[1:15]
-db <- db[db$neighbourhood %in% show_b,]
-db$destacado <- ifelse(db$neighbourhood=='Puerto Madero','Puerto Madero','Otros barrios')
-db$neighbourhood <- factor(db$neighbourhood,levels=names(sort(setNames(db$mediana,db$neighbourhood))))
-
-p_comunicativo <- ggplot2::ggplot(db,ggplot2::aes(y=neighbourhood,x=mediana))+
- ggplot2::geom_vline(xintercept=mediana_resto,color='#2A5360',linetype='dashed',linewidth=.9)+
- ggplot2::geom_segment(ggplot2::aes(x=q25,xend=q75,yend=neighbourhood,color=destacado),
-                       linewidth=2.2,alpha=.85)+
- ggplot2::geom_point(ggplot2::aes(color=destacado),size=3.1)+
- ggplot2::scale_color_manual(values=c('Puerto Madero'='#D4764C','Otros barrios'='#ADB9BC'),guide='none')+
- ggplot2::scale_x_continuous(labels=function(x) paste0('$',round(x/1000),' mil'),
-       limits=c(0,300000),breaks=seq(0,300000,50000))+
- ggplot2::labs(title=paste0('Puerto Madero supera en ',round(premium),
-           '% al resto de CABA en el precio mediano'),
-  subtitle='Viviendas completas para 2 huespedes. Medianas anunciadas por noche (ARS).',
-  x='Precio anunciado (ARS)',y=NULL,
-  caption=paste0('Fuente: Inside Airbnb (septiembre 2026). Puerto Madero n=',nrow(pm),
-      '; resto n=',nrow(resto),'. Barras: del cuartil 25 al 75; puntos: mediana.'))+
- ggplot2::annotate('label',x=180000,y='Puerto Madero',
-   label=paste0('+',round(premium),'% frente al resto de CABA'),
-   color='#C25B36',fill='#FFF1E8',fontface='bold',size=3.7,vjust=-1.1)+
- ggplot2::theme_minimal(base_size=12)+
- ggplot2::theme(plot.background=ggplot2::element_rect(fill='#FAF8F3',color=NA),
-       panel.grid.major.y=ggplot2::element_blank(),panel.grid.minor=ggplot2::element_blank(),
-       plot.title=ggplot2::element_text(face='bold',size=16,color='#20353B'),
-       axis.text.y=ggplot2::element_text(color='#20353B'),
-       plot.caption=ggplot2::element_text(hjust=0,color='#5B686C',size=8))
-ggplot2::ggsave('output/graficos/grupo_20_comunicativo.jpg',p_comunicativo,
-                 width=25,height=18,units='cm',dpi=300,bg='#FAF8F3')
-cat('Graficos generados. Mediana Puerto Madero:',mediana_pm,
-    'resto:',mediana_resto,'diferencia %:',premium,'\n')
+# Los graficos comunicativos anteriores se retiraron de este script.
+# El grafico comunicativo definitivo se calcula desde los datos reales en
+# script/07_grafico_comunicativo_precio_vs_oferta.R.
+# Aqui mantenemos solo el grafico exploratorio y la tabla 05 requerida
+# por script/06_control_calidad.R.
+cat('Exploratorio y tabla 05 generados. Mediana Puerto Madero:',
+    mediana_pm, 'resto:', mediana_resto, 'diferencia %:', premium, '\n')
