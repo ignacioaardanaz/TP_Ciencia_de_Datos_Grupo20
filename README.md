@@ -160,16 +160,12 @@ source(
 )
 ```
 
-Este script calcula los indicadores del gráfico y genera:
+Este script calcula los indicadores **desde `input/listings_preparado.csv`**, generado a partir de los archivos originales, y escribe:
 
 - `output/tablas/07_precio_oferta_por_barrio.csv`
-- `output/graficos/grupo_20_comunicativo.jpg`
+- `output/graficos/grupo_20_comunicativo.png`
 
-En el repositorio también se incluye la versión seleccionada para la presentación, denominada:
-
-`output/graficos/grupo_20_comunicativo.png`
-
-El JPG es la salida configurada en el script 07; el PNG es el archivo gráfico publicado. Para reproducir exactamente el formato PNG, debe utilizarse la exportación correspondiente.
+El script `00_ejecutar_todo.R` incluye el paso 07 al final del flujo. El script 05 genera el exploratorio y conserva la tabla de comparación requerida para el control de calidad; ya no sobrescribe el comunicativo.
 
 ### Paso 6. Verificar los resultados
 
@@ -186,7 +182,7 @@ Para controlar la ejecución se recomienda:
 4. Verificar los resultados del clustering.
 5. Confirmar que los gráficos generados correspondan a los resultados presentados.
 
-El gráfico comunicativo fue ejecutado y comprobado en RStudio. La ejecución correcta de ese script específico no sustituye la verificación del proyecto completo.
+El gráfico comunicativo fue ejecutado y comprobado en RStudio. La ejecución correcta de ese script específico no sustituye la verificación del proyecto completo. **Los resultados `07_*` deben regenerarse localmente y subirse a GitHub** para que coincidan con el código actualizado.
 
 ## 5. Decisiones metodológicas
 
@@ -271,7 +267,7 @@ Los resultados definitivos del clustering deben corresponder a la ejecución rea
 
 **Archivo:**
 
-`output/graficos/grupo_20_exploratorio.jpg`
+`output/graficos/grupo_20_exploratorio.jpeg` (archivo actualmente publicado; el script 05 exporta `.jpg`)
 
 Se presenta un mapa de calor que compara los precios medianos publicados según:
 
