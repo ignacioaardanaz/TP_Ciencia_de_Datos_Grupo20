@@ -109,9 +109,6 @@ TP_Ciencia_de_Datos_Grupo20/
 - **`script/`:** reúne los scripts de R utilizados en el proyecto.
 - **`utils/`:** contiene una función auxiliar por archivo. `funciones_comunes.R` es solamente un cargador que invoca los diez scripts individuales; no contiene definiciones de funciones. Los análisis conservan la misma lógica y utilizan ese cargador.
 
-El flujo de trabajo general es:
-
-**Datos originales → Preparación → Análisis → Resultados**
 
 Los archivos originales almacenados en `raw/` no se modifican.
 
