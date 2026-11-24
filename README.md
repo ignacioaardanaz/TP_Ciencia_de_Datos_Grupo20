@@ -39,7 +39,7 @@ Entre las variables utilizadas se encuentran:
 
 ### Aclaración sobre las fechas
 
-El grupo utilizó históricamente el **23/09/2026** como fecha de referencia.
+Utilizamos históricamente el **23/09/2026** como fecha de referencia.
 
 Sin embargo, en el archivo detallado, la variable `last_scraped` registra capturas del **25, 26 y 27 de septiembre de 2026**.
 
