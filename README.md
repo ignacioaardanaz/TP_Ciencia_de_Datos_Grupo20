@@ -95,7 +95,6 @@ TP_Ciencia_de_Datos_Grupo20/
 │   └── fmt.R
 │
 ├── proyecto.Rproj
-├── NOTAS_REPRODUCCION.md
 └── README.md
 ```
 
