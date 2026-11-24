@@ -234,7 +234,6 @@ Se calculan errores estándar agrupados por anfitrión y se realizan diagnóstic
 - Observaciones influyentes (distancia de Cook).
 - Modelos alternativos de sensibilidad.
 
-Los coeficientes permiten interpretar asociaciones condicionales entre variables, pero no efectos causales.
 
 ### 5.5. Concentración geográfica
 
